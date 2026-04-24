@@ -26,11 +26,16 @@
         overflow: hidden;
       }
 
-      body {
-        margin: 0;
-        background: var(--bg);
-        font-family: -apple-system, system-ui, sans-serif;
-      }
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+        <style dangerouslySetInnerHTML={{ __html: `
+          body {
+            font-family: 'Outfit', -apple-system, system-ui, sans-serif;
+            background-color: #0F1113;
+          }
+        ` }} />
+    </style>
 
       .gridBg {
         min-height: 100%;
