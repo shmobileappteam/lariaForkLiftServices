@@ -19,7 +19,6 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Elite Texture Background */}
       <View style={styles.texture}>
         {Array.from({ length: 50 }).map((_, i) => (
           <View key={i} style={[styles.stripe, { top: i * 20 - 200, transform: [{ rotate: '-45deg' }] }]} />
@@ -35,11 +34,10 @@ export default function HomeScreen() {
 
       <ScrollView contentContainerStyle={styles.list} showsVerticalScrollIndicator={false}>
         <View style={styles.listHeader}>
-          <Text style={styles.welcomeText}>Welcome back, {USER.name.split(' ')[0]}</Text>
-          <Text style={styles.sectionTitle}>Manage Your Fleet</Text>
+          <Text style={styles.welcomeText}>Hello, {USER.name.split(' ')[0]}</Text>
+          <Text style={styles.sectionTitle}>Fleet Management</Text>
         </View>
 
-        {/* Hero Service Banner */}
         <TouchableOpacity 
           style={styles.heroBanner} 
           activeOpacity={0.9}
@@ -51,13 +49,12 @@ export default function HomeScreen() {
               <View style={styles.liveDot} />
               <Text style={styles.liveText}>OPERATIONAL</Text>
             </View>
-            <Text style={styles.heroTitle}>24/7 Support Available</Text>
-            <Text style={styles.heroSubtitle}>Emergency repair dispatch is active in your area.</Text>
+            <Text style={styles.heroTitle}>24/7 Service Support</Text>
+            <Text style={styles.heroSubtitle}>Emergency dispatch is active.</Text>
           </View>
-          <MaterialCommunityIcons name="shield-check" size={60} color="rgba(255,255,255,0.05)" style={styles.heroIcon} />
+          <MaterialCommunityIcons name="shield-check" size={40} color="rgba(255,255,255,0.05)" style={styles.heroIcon} />
         </TouchableOpacity>
 
-        {/* Services List */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionLabel}>Available Services</Text>
           <TouchableOpacity onPress={() => router.push('/booking/services')}>
@@ -76,7 +73,6 @@ export default function HomeScreen() {
         ))}
       </ScrollView>
 
-      {/* Elite Side Drawer */}
       <Modal visible={drawerOpen} animationType="fade" transparent onRequestClose={() => setDrawerOpen(false)}>
         <View style={styles.drawerOverlay}>
           <Pressable style={styles.drawerBackdrop} onPress={() => setDrawerOpen(false)} />
@@ -84,16 +80,13 @@ export default function HomeScreen() {
             <View style={styles.drawerHeader}>
               <Image source={require('../../assets/images/Logo.png')} style={styles.drawerLogo} resizeMode="contain" />
               <TouchableOpacity onPress={() => setDrawerOpen(false)} style={styles.closeBtn}>
-                <MaterialCommunityIcons name="close" size={24} color={Colors.textMuted} />
+                <MaterialCommunityIcons name="close" size={20} color={Colors.textMuted} />
               </TouchableOpacity>
             </View>
 
             <View style={styles.drawerUser}>
-              <View style={styles.avatarContainer}>
-                <Avatar size={60} />
-                <View style={styles.onlineBadge} />
-              </View>
-              <View style={{ marginLeft: 16 }}>
+              <Avatar size={44} />
+              <View style={{ marginLeft: 12 }}>
                 <Text style={styles.drawerName}>{USER.name}</Text>
                 <Text style={styles.drawerEmail}>{USER.email}</Text>
               </View>
@@ -108,20 +101,15 @@ export default function HomeScreen() {
                   style={styles.drawerItem}
                   onPress={() => { setDrawerOpen(false); if (item.route) router.push(item.route as any); }}
                 >
-                  <View style={styles.drawerIconContainer}>
-                    <MaterialCommunityIcons name={item.icon as any} size={22} color={Colors.primary} />
-                  </View>
+                  <MaterialCommunityIcons name={item.icon as any} size={18} color={Colors.primary} />
                   <Text style={styles.drawerItemText}>{item.label}</Text>
                 </TouchableOpacity>
               ))}
             </View>
 
             <View style={styles.drawerBottom}>
-              <View style={styles.drawerDivider} />
               <TouchableOpacity style={styles.drawerItem} onPress={() => { setDrawerOpen(false); router.replace('/auth/get-started'); }}>
-                <View style={[styles.drawerIconContainer, { backgroundColor: 'rgba(255,255,255,0.03)' }]}>
-                  <MaterialCommunityIcons name="logout" size={20} color={Colors.textMuted} />
-                </View>
+                <MaterialCommunityIcons name="logout" size={18} color={Colors.textMuted} />
                 <Text style={[styles.drawerItemText, { color: Colors.textSecondary }]}>Log Out</Text>
               </TouchableOpacity>
             </View>
@@ -136,96 +124,43 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background },
   texture: { ...StyleSheet.absoluteFillObject, opacity: 0.05 },
   stripe: { position: 'absolute', width: 1000, height: 1, backgroundColor: '#FFF', left: -200 },
-  list: { paddingHorizontal: Spacing.screenPadding, paddingBottom: 100 },
-  listHeader: { marginTop: 24, marginBottom: 24 },
-  welcomeText: { color: Colors.textSecondary, fontSize: 14, fontWeight: '500', marginBottom: 6 },
-  sectionTitle: { color: Colors.text, fontSize: 24, fontWeight: '800', letterSpacing: -0.8 },
+  list: { paddingHorizontal: 16, paddingBottom: 60 },
+  listHeader: { marginTop: 16, marginBottom: 16 },
+  welcomeText: { fontFamily: 'Outfit', color: Colors.textSecondary, fontSize: 12, fontWeight: '500', marginBottom: 4 },
+  sectionTitle: { fontFamily: 'Outfit', color: Colors.text, fontSize: 18, fontWeight: '800' },
   heroBanner: {
     backgroundColor: Colors.surfaceElevated,
-    borderRadius: Spacing.radiusXl,
-    padding: 24,
-    marginBottom: 32,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 20,
     borderWidth: 1,
     borderColor: Colors.border,
     overflow: 'hidden',
     position: 'relative',
   },
-  heroGlow: {
-    position: 'absolute',
-    top: -50,
-    right: -50,
-    width: 150,
-    height: 150,
-    backgroundColor: Colors.primary,
-    opacity: 0.05,
-    borderRadius: 75,
-  },
+  heroGlow: { position: 'absolute', top: -30, right: -30, width: 100, height: 100, backgroundColor: Colors.primary, opacity: 0.05, borderRadius: 50 },
   heroContent: { zIndex: 1 },
-  liveBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(34,197,94,0.1)',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 8,
-    alignSelf: 'flex-start',
-    marginBottom: 12,
-    gap: 6,
-  },
-  liveDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: Colors.primary },
-  liveText: { color: Colors.primary, fontSize: 10, fontWeight: '800', letterSpacing: 0.5 },
-  heroTitle: { color: Colors.text, fontSize: 20, fontWeight: '800' },
-  heroSubtitle: { color: Colors.textMuted, fontSize: 13, marginTop: 6, lineHeight: 18 },
-  heroIcon: { position: 'absolute', right: -10, bottom: -10 },
-  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 },
-  sectionLabel: { color: Colors.textSecondary, fontSize: 16, fontWeight: '700' },
-  viewAll: { color: Colors.primary, fontSize: 13, fontWeight: '700' },
-  
-  // Drawer
+  liveBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(34,197,94,0.1)', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6, alignSelf: 'flex-start', marginBottom: 8, gap: 4 },
+  liveDot: { width: 4, height: 4, borderRadius: 2, backgroundColor: Colors.primary },
+  liveText: { color: Colors.primary, fontSize: 8, fontWeight: '800', letterSpacing: 0.5 },
+  heroTitle: { fontFamily: 'Outfit', color: Colors.text, fontSize: 16, fontWeight: '800' },
+  heroSubtitle: { fontFamily: 'Outfit', color: Colors.textMuted, fontSize: 11, marginTop: 4 },
+  heroIcon: { position: 'absolute', right: -5, bottom: -5 },
+  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 },
+  sectionLabel: { color: Colors.textSecondary, fontSize: 14, fontWeight: '700' },
+  viewAll: { color: Colors.primary, fontSize: 12, fontWeight: '700' },
   drawerOverlay: { flex: 1, flexDirection: 'row' },
   drawerBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.85)' },
-  drawer: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    width: 300,
-    backgroundColor: Colors.surface,
-    paddingHorizontal: 24,
-    borderRightWidth: 1,
-    borderColor: Colors.border,
-  },
-  drawerHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 },
-  drawerLogo: { width: 110, height: 32 },
-  closeBtn: { padding: 8 },
-  drawerUser: { flexDirection: 'row', alignItems: 'center', marginBottom: 24 },
-  avatarContainer: { position: 'relative' },
-  onlineBadge: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    backgroundColor: Colors.primary,
-    borderWidth: 2,
-    borderColor: Colors.surface,
-  },
-  drawerName: { color: Colors.text, fontSize: 18, fontWeight: '700' },
-  drawerEmail: { color: Colors.textMuted, fontSize: 12, marginTop: 2 },
-  drawerDivider: { height: 1, backgroundColor: Colors.border, marginVertical: 12 },
+  drawer: { position: 'absolute', left: 0, top: 0, bottom: 0, width: 260, backgroundColor: Colors.surface, paddingHorizontal: 20, borderRightWidth: 1, borderColor: Colors.border },
+  drawerHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 },
+  drawerLogo: { width: 90, height: 26 },
+  closeBtn: { padding: 4 },
+  drawerUser: { flexDirection: 'row', alignItems: 'center', marginBottom: 16 },
+  drawerName: { fontFamily: 'Outfit', color: Colors.text, fontSize: 15, fontWeight: '700' },
+  drawerEmail: { fontFamily: 'Outfit', color: Colors.textMuted, fontSize: 11 },
+  drawerDivider: { height: 1, backgroundColor: Colors.border, marginVertical: 8 },
   menuContainer: { flex: 1 },
-  drawerItem: { flexDirection: 'row', alignItems: 'center', gap: 16, paddingVertical: 14 },
-  drawerIconContainer: {
-    width: 44,
-    height: 44,
-    borderRadius: 14,
-    backgroundColor: 'rgba(255,255,255,0.02)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: Colors.border,
-  },
-  drawerItemText: { color: Colors.textSecondary, fontSize: 15, fontWeight: '600' },
-  drawerBottom: { marginTop: 'auto', paddingBottom: 40 },
+  drawerItem: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 10 },
+  drawerItemText: { fontFamily: 'Outfit', color: Colors.textSecondary, fontSize: 14, fontWeight: '600' },
+  drawerBottom: { marginTop: 'auto', paddingBottom: 30 },
 });
