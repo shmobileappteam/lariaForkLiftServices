@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: 'Outfit',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '800',
     letterSpacing: 6,
     marginBottom: 14,
@@ -239,9 +239,9 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Outfit',
     color: '#FFF',
-    fontSize: 40,
+    fontSize: 32,
     fontWeight: '900',
-    lineHeight: 48,
+    lineHeight: 40,
     marginBottom: 20,
     textAlign: 'center',
     letterSpacing: -0.5,

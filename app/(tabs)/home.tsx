@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
   stripe: { position: 'absolute', width: 1000, height: 1, backgroundColor: '#FFF', left: -200 },
   list: { paddingHorizontal: Spacing.screenPadding, paddingBottom: 100 },
   listHeader: { marginTop: 24, marginBottom: 24 },
-  welcomeText: { color: Colors.textSecondary, fontSize: 15, fontWeight: '500', marginBottom: 6 },
-  sectionTitle: { color: Colors.text, fontSize: 28, fontWeight: '800', letterSpacing: -0.8 },
+  welcomeText: { color: Colors.textSecondary, fontSize: 14, fontWeight: '500', marginBottom: 6 },
+  sectionTitle: { color: Colors.text, fontSize: 24, fontWeight: '800', letterSpacing: -0.8 },
   heroBanner: {
     backgroundColor: Colors.surfaceElevated,
     borderRadius: Spacing.radiusXl,
