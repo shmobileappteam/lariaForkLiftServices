@@ -39,13 +39,9 @@ node_modules/
 dist/
 ```
 
-### 1.3 `preview.html` 
+### 1.3 `preview.html`
 
-Update branding to **Aria Forklift** and set the `iframe` src or references to match:
-
-```
-https://demo.sourapps.com/aria-forklift/
-```
+Ensure this file exists in your root directory. It provides the "Elite Frame" experience.
 
 ---
 
@@ -54,20 +50,22 @@ https://demo.sourapps.com/aria-forklift/
 SSH into the server and run the following:
 
 ```bash
-# 1. Clone the repository
-cd /var/www
-git clone https://github.com/SH-Appace/AriaForklift.git
-cd /var/www/AriaForklift
+# 1. Navigate to web root
+cd /var/www/lariaForkLiftServices
 
-# 2. Install dependencies & build
+# 2. Pull latest changes
+git pull
+
+# 3. Install dependencies & build
 npm install
 npx expo export --platform web
 
-# 3. Inject subpath routing patch
+# 4. Inject subpath routing patch (CRITICAL for subpath navigation)
 sed -i 's#</head>#<script>(function(){var b="/aria-forklift",p=location.pathname;if(p===b||p.startsWith(b+"/")){history.replaceState(null,"",p.slice(b.length)||"/")}})();</script></head>#' dist/index.html
 
-# 4. Start with PM2 on port 9010
-pm2 start "npx serve /var/www/AriaForklift/dist -p 9010 --single" --name aria-forklift
+# 5. Start with PM2
+pm2 delete aria-forklift || true
+pm2 start "npx serve dist -p 9010 --single" --name aria-forklift
 pm2 save
 ```
 
@@ -77,29 +75,31 @@ pm2 save
 
 Edit: `nano /etc/nginx/sites-available/default`
 
-Add the following **inside** the `server { ... }` block:
+Add these blocks **inside** your `server { ... }` block.
 
 ```nginx
-# Aria Forklift Services
+# Aria Forklift Services - Main App
 location /aria-forklift/ {
     proxy_pass         http://localhost:9010/;
     proxy_http_version 1.1;
     proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
 }
 
+# Aria Forklift - Preview Frame
 location = /aria-forklift/preview.html {
-    alias /var/www/AriaForklift/preview.html;
+    alias /var/www/lariaForkLiftServices/preview.html;
+    add_header Cache-Control "no-cache";
 }
 
-# Aria Forklift — Asset Fallback
+# Aria Forklift - Favicon Fix
+location = /aria-forklift/favicon.ico {
+    alias /var/www/lariaForkLiftServices/dist/favicon.ico;
+}
+
+# Aria Forklift — Asset Fallback (Important for deep linking)
 location @assets_aria_forklift {
-    root       /var/www/AriaForklift/dist;
-    try_files  $uri =404;
-}
-
-# Aria Forklift — Expo Bundle Fallback
-location @expo_aria_forklift {
-    root       /var/www/AriaForklift/dist;
+    root       /var/www/lariaForkLiftServices/dist;
     try_files  $uri =404;
 }
 ```
@@ -114,34 +114,16 @@ nginx -t && systemctl restart nginx
 
 ## Step 4 — Verification
 
-| Check            | URL                                                 |
-| ---------------- | --------------------------------------------------- |
+| Check            | URL                                                  |
+| ---------------- | ---------------------------------------------------- |
 | 🟢 Live App      | https://demo.sourapps.com/aria-forklift/             |
 | 📱 Preview Frame | https://demo.sourapps.com/aria-forklift/preview.html |
 
 ---
 
-## Port Reference (Updated)
+## Troubleshooting (404 Not Found)
 
-| App                  | Port     |
-| -------------------- | -------- |
-| UnStruck             | 9004     |
-| HealingCompass       | 9005     |
-| AATO1                | 9007     |
-| Northeastern         | 9009     |
-| **Aria Forklift**    | **9010** |
-
----
-
-## Redeploy / Update
-
-When pushing new changes, re-run on the server:
-
-```bash
-cd /var/www/AriaForklift
-git pull
-npm install
-npx expo export --platform web
-sed -i 's#</head>#<script>(function(){var b="/aria-forklift",p=location.pathname;if(p===b||p.startsWith(b+"/")){history.replaceState(null,"",p.slice(b.length)||"/")}})();</script></head>#' dist/index.html
-pm2 restart aria-forklift
-```
+If you still see 404:
+1.  **Missing File**: Verify the file exists on the server: `ls -l /var/www/lariaForkLiftServices/preview.html`
+2.  **PM2 Port**: Verify the app is responding on 9010: `curl -I http://localhost:9010/`
+3.  **Nginx Config**: Ensure you don't have another `location /` block that is intercepting the request before `/aria-forklift/`.
