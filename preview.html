@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aria Forklift — Elite App Preview</title>
+    <style>
+      :root {
+        --bg: #0b0d0e;
+        --shadow: rgba(0, 0, 0, 0.8);
+        --border: rgba(255, 255, 255, 0.05);
+        --frameStrokeOuter: #1a1c1e;
+        --frameStrokeInner: #2a2c2e;
+        --frameStrokeGlow: #22c55e;
+        --screenBg: #0f1113;
+        --homeBar: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        font-family: -apple-system, system-ui, sans-serif;
+      }
+
+      .gridBg {
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 22px 16px;
+        background-color: #0b0d0e;
+        background-image: linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+
+      .phoneFrame {
+        position: relative;
+        width: 380px;
+        height: 780px;
+        background: var(--frameStrokeOuter);
+        border-radius: 56px;
+        padding: 12px;
+        box-shadow: 
+          0 50px 100px -20px var(--shadow),
+          0 0 0 2px var(--frameStrokeInner),
+          0 0 40px -10px var(--frameStrokeGlow);
+        border: 1px solid var(--border);
+      }
+
+      .screen {
+        width: 100%;
+        height: 100%;
+        background: var(--screenBg);
+        border-radius: 44px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: var(--screenBg);
+      }
+
+      /* Notch */
+      .notch {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 160px;
+        height: 34px;
+        background: var(--frameStrokeOuter);
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 6px;
+      }
+
+      .speaker {
+        width: 40px;
+        height: 4px;
+        background: #333;
+        border-radius: 2px;
+      }
+
+      /* Home Indicator */
+      .homeIndicator {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 5px;
+        background: var(--homeBar);
+        border-radius: 10px;
+        opacity: 0.3;
+        z-index: 10;
+      }
+
+      .branding {
+        position: absolute;
+        bottom: -60px;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+
+      .branding h1 {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .branding p {
+        color: #666;
+        font-size: 12px;
+        margin-top: 4px;
+        font-weight: 600;
+      }
+
+      @media (max-height: 850px) {
+        .phoneFrame {
+          transform: scale(0.9);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gridBg">
+      <div class="phoneFrame">
+        <div class="notch">
+          <div class="speaker"></div>
+        </div>
+        <div class="screen">
+          <iframe src="http://localhost:8081/home" title="App Preview"></iframe>
+        </div>
+        <div class="homeIndicator"></div>
+        
+        <div class="branding">
+          <h1>Aria Forklift</h1>
+          <p>Elite Material Handling Solutions</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

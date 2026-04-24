@@ -1,29 +1,45 @@
 {
   "expo": {
-    "name": "lariaForkLiftServices",
-    "slug": "lariaForkLiftServices",
+    "name": "Aria Forklift Services",
+    "slug": "aria-forklift-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "lariaforkliftservices",
+    "theme": "dark",
+    "scheme": "ariaforklift",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aria.forklift.app",
+      "config": {
+        "googleMapsApiKey": "AIzaSyCI5Nj-2ez381KcGWt9aJfljUbgxfciA0A"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#0F1113",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.aria.forklift.app",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCI5Nj-2ez381KcGWt9aJfljUbgxfciA0A"
+        }
+      }
     },
     "web": {
+      "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "baseUrl": "/aria-forklift",
+      "config": {
+        "googleMapsApiKey": "AIzaSyCI5Nj-2ez381KcGWt9aJfljUbgxfciA0A"
+      }
     },
     "plugins": [
       "expo-router",
@@ -33,16 +49,17 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#0F1113",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#0F1113"
           }
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
-      "reactCompiler": true
+      "reactCompiler": true,
+      "baseUrl": "/aria-forklift"
     }
   }
 }
