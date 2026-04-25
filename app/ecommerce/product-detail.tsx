@@ -31,7 +31,7 @@ export default function ProductDetailScreen() {
           resizeMode="cover" 
         />
         <View style={styles.imageOverlay} />
-        <View style={[styles.headerOverlay, { paddingTop: insets.top }]}>
+        <View style={[styles.headerOverlay, { paddingTop: insets.top + 20 }]}>
           <TouchableOpacity onPress={() => router.back()} style={styles.iconBtn}>
             <MaterialCommunityIcons name="chevron-left" size={30} color="#FFF" />
           </TouchableOpacity>
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 32,
     padding: 24,
   },
-  categoryLabel: { color: Colors.primary, fontSize: 12, fontWeight: '800', letterSpacing: 1.5, marginBottom: 8 },
+  categoryLabel: { color: Colors.primary, fontSize: 12, fontWeight: '800', letterSpacing: 1.5, marginBottom: 8, marginTop: 24 },
   titleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
   productName: { color: Colors.text, fontSize: 26, fontWeight: '900', lineHeight: 32 },
   favBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: Colors.surface, justifyContent: 'center', alignItems: 'center' },
