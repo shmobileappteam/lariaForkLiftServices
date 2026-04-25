@@ -27,7 +27,7 @@ export default function ShopScreen() {
       </View>
 
       {/* Dynamic Header */}
-      <View style={[styles.header, { paddingTop: insets.top + 10 }]}>
+      <View style={[styles.header, { paddingTop: insets.top + 20 }]}>
         <View style={styles.headerTop}>
           <Image 
             source={require('../../assets/images/Logo.png')} 

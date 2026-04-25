@@ -124,6 +124,7 @@ nginx -t && systemctl restart nginx
 ## Troubleshooting (404 Not Found)
 
 If you still see 404:
+
 1.  **Missing File**: Verify the file exists on the server: `ls -l /var/www/lariaForkLiftServices/preview.html`
 2.  **PM2 Port**: Verify the app is responding on 9010: `curl -I http://localhost:9010/`
 3.  **Nginx Config**: Ensure you don't have another `location /` block that is intercepting the request before `/aria-forklift/`.
