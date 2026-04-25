@@ -31,7 +31,7 @@ export const AppHeader = ({
     <View style={[
       styles.header, 
       { 
-        paddingTop: insets.top + 8, 
+        paddingTop: insets.top + 20, 
         backgroundColor: isDark ? Colors.background : Colors.lightBg,
         borderBottomWidth: 1,
         borderBottomColor: isDark ? Colors.border : Colors.lightBorder,
@@ -87,7 +87,7 @@ export const BackHeader = ({
     <View style={[
       styles.header, 
       { 
-        paddingTop: insets.top + 8, 
+        paddingTop: insets.top + 20, 
         backgroundColor: isDark ? Colors.background : Colors.lightBg,
         borderBottomWidth: 1,
         borderBottomColor: isDark ? Colors.border : Colors.lightBorder,
